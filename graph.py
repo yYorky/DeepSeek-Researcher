@@ -24,7 +24,7 @@ if not GROQ_API_KEY:
     raise ValueError("Missing GROQ API key. Please set it in a .env file.")
 
 # Initialize the Groq LLM model
-llm_groq = ChatGroq(model="llama-guard-3-8b", api_key=GROQ_API_KEY)
+llm_groq = ChatGroq(model="deepseek-r1-distill-llama-70b", api_key=GROQ_API_KEY)
 
 def extract_json(text):
     """ Extract JSON from the response text """
@@ -52,7 +52,7 @@ def generate_query(state, config):
     extracted_json = extract_json(result.content)
 
     if not extracted_json:
-        st.error("Failed to extract valid JSON from LLM response.")
+        # st.error("Failed to extract valid JSON from LLM response.")
         return {"search_query": "default search query"}  # Fallback
 
     # Ensure the response is valid JSON
@@ -106,7 +106,7 @@ def reflect_on_summary(state, config):
     extracted_json = extract_json(result.content)
 
     if not extracted_json:
-        st.error("Failed to extract valid JSON from LLM response.")
+        # st.error("Failed to extract valid JSON from LLM response.")
         return {"search_query": f"Tell me more about {state.research_topic}"}  # Fallback
 
     # Parse Extracted JSON
