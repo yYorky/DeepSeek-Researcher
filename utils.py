@@ -17,7 +17,7 @@ if not GROQ_API_KEY:
     raise ValueError("Missing GROQ API key. Please set it in a .env file.")
 
 # Initialize the Groq LLM model
-llm_groq = ChatGroq(model="deepseek-r1-distill-llama-70b", api_key=GROQ_API_KEY)
+llm_groq = ChatGroq(model="llama-guard-3-8b", api_key=GROQ_API_KEY)
 
 @traceable
 def groq_search(query: str) -> Dict[str, Any]:

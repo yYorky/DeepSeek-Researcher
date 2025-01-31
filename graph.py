@@ -24,7 +24,7 @@ if not GROQ_API_KEY:
     raise ValueError("Missing GROQ API key. Please set it in a .env file.")
 
 # Initialize the Groq LLM model
-llm_groq = ChatGroq(model="deepseek-r1-distill-llama-70b", api_key=GROQ_API_KEY)
+llm_groq = ChatGroq(model="llama-guard-3-8b", api_key=GROQ_API_KEY)
 
 def extract_json(text):
     """ Extract JSON from the response text """
@@ -45,8 +45,8 @@ def generate_query(state, config):
         HumanMessage(content="Generate a query for web search:")
     ])
     
-    # Debug: Print the LLM response
-    st.write("DEBUG: LLM Response Content", result.content)  
+    # # Debug: Print the LLM response
+    # st.write("DEBUG: LLM Response Content", result.content)  
 
     # Extract only the JSON part
     extracted_json = extract_json(result.content)
@@ -99,8 +99,8 @@ def reflect_on_summary(state, config):
         HumanMessage(content=f"Identify a knowledge gap and generate a follow-up web search query: {state.running_summary}")
     ])
     
-    # Debugging: Print Raw Response
-    st.write("DEBUG: LLM Reflection Response", result.content)
+    # # Debugging: Print Raw Response
+    # st.write("DEBUG: LLM Reflection Response", result.content)
 
     # Extract JSON from Response
     extracted_json = extract_json(result.content)
