@@ -1,0 +1,12 @@
+streamlit
+langchain
+langchain-community
+langchain-core
+langchain-groq
+langgraph
+tavily-python
+python-dotenv
+requests
+pydantic
+dataclasses
+typing_extensions
