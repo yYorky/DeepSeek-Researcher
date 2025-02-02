@@ -5,6 +5,7 @@ import streamlit as st
 from state import SummaryState
 from graph import graph
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 
@@ -40,14 +41,19 @@ def extract_json(text):
 
 if st.button("Start Research"):
     if research_topic:
+        start_time = time.time()
+        
         col1, col2 = st.columns([1, 1])  # Create two columns for layout
         with col2:
-            st.subheader("🔄 Research in Progress")
+            # st.subheader("🔄 Research in Progress")
             progress_placeholder = st.empty()
 
         with st.spinner("🧐 Researching... This may take a moment."):
             state = SummaryState(research_topic=research_topic)
             final_result = graph.invoke(state)
+
+        end_time = time.time()
+        total_run_time = end_time - start_time
 
         # Extract Research Summary
         research_summary = final_result.get("running_summary", "No summary generated.")
@@ -58,29 +64,35 @@ if st.button("Start Research"):
 
         # Display Research Summary in left column
         with col1:
-            st.subheader("📌 Research Summary")
-            st.markdown(research_summary_cleaned)
+            with st.container():
+                st.subheader("📌 Research Summary")
+                st.markdown(research_summary_cleaned)
+                st.subheader("⏳ Total Run Time")
+                st.success(f"{total_run_time:.2f} seconds")
 
         # Display Thought Process in right column during and after processing
         with col2:
-            if thought_process:
-                st.subheader("🤖 DeepSeek Model's Thought Process")
-                st.info(thought_process)
-            else:
-                progress_placeholder.text("Processing insights... Generating thought process...")
+            with st.container():
+                if thought_process:
+                    st.subheader("🧐 DeepSeek Model's Thought Process")
+                    st.info(thought_process)
+                else:
+                    progress_placeholder.text("Processing insights... Generating thought process...")
 
         # Display Follow-Up Reflections (if available)
         if "knowledge_gap" in final_result and "follow_up_query" in final_result:
             with col1:
-                st.subheader("🔄 Research Refinements")
-                st.write(f"**Identified Knowledge Gap:** {final_result['knowledge_gap']}")
-                st.write(f"**Next Research Query:** {final_result['follow_up_query']}")
+                with st.container():
+                    st.subheader("🔄 Research Refinements")
+                    st.write(f"**Identified Knowledge Gap:** {final_result['knowledge_gap']}")
+                    st.write(f"**Next Research Query:** {final_result['follow_up_query']}")
 
         # Display Sources in a structured format
         if "sources_gathered" in final_result:
             with col1:
-                st.subheader("📚 Research Sources")
-                for source in final_result["sources_gathered"]:
-                    st.markdown(f"🔗 [{source.split(': ')[-1]}]({source.split(': ')[-1]})")
+                with st.container():
+                    st.subheader("📚 Research Sources")
+                    for source in final_result["sources_gathered"]:
+                        st.markdown(f"🔗 [{source.split(': ')[-1]}]({source.split(': ')[-1]})")
     else:
         st.warning("⚠️ Please enter a research topic before starting.")
