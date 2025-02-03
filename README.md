@@ -20,7 +20,11 @@ This project draws inspiration from the [LangChain Ollama Deep Researcher](https
 
 Here are two demo results for a couple of questions:
 
+![](https://github.com/yYorky/DeepSeek-Researcher/blob/main/DeepResearch_1.gif?raw=true)
 
+
+
+![](https://github.com/yYorky/DeepSeek-Researcher/blob/main/DeepResearch_2.gif?raw=true)
 
 
 
