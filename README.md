@@ -9,11 +9,20 @@ DeepSeek Web Researcher is an advanced research assistant tool designed to autom
 - 🔍 **Automated Web Research**: Utilizes Tavily API for targeted web searches.
 - 🧐 **AI-Powered Summarization**: Employs Groq's DeepSeek R1 model to summarize and synthesize research findings.
 - 🔄 **Iterative Research Loops**: Identifies knowledge gaps and refines search queries to ensure thorough coverage.
-- 📅 **User-Friendly Interface**: Streamlit-based UI for seamless interaction and real-time research tracking.
+- 📅 **User-Friendly Interface**: Streamlit-based UI for seamless interaction.
+
 
 ## Inspiration
 
 This project draws inspiration from the [LangChain Ollama Deep Researcher](https://github.com/langchain-ai/ollama-deep-researcher), adopting its modular approach to automating deep research tasks. By integrating LangChain's robust framework with models served by Groq and Tavily's efficient search capabilities, DeepSeek Web Researcher offers a more scalable and powerful solution.
+
+## Demo
+
+Here are two demo results for a couple of questions:
+
+
+
+
 
 ## Installation
 
